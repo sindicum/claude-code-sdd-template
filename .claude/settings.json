@@ -16,7 +16,20 @@
       "Bash(npm run typecheck:*)",
       "Bash(npm run build:*)",
       "Bash(npm run lint:*)",
-      "Bash(npx playwright install:*)"
+      "Bash(npx playwright install:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git remote:*)",
+      "Bash(git init:*)",
+      "Bash(rm -rf .git:*)"
     ],
     "deny": [],
     "ask": []

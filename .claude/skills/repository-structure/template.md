@@ -293,7 +293,6 @@ src/
 - `node_modules/`
 - `dist/`
 - `.env`
-- `.steering/` (作業単位の一時ドキュメント)
 - `*.log`
 - `.DS_Store`
 
@@ -302,5 +301,4 @@ src/
 ツールで除外すべきファイル:
 - `dist/`
 - `node_modules/`
-- `.steering/`
 - `coverage/`

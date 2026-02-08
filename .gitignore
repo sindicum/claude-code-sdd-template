@@ -8,3 +8,7 @@
 
 # IDE
 .vscode/*
+
+# Claude Code SDD template infrastructure
+.claude/
+.devcontainer/

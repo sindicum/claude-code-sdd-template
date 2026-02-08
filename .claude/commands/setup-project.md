@@ -80,9 +80,33 @@ ls docs/ideas/
 2. 既存のドキュメントを読む
 3. スキルのテンプレートに従って`docs/glossary.md`を作成
 
+### ステップ7: Git初期化
+
+1. `.gitignore` を確認し、以下のエントリが無ければ追加する:
+   - `.claude/`
+   - `.devcontainer/`
+
+2. 既存の `.git/` が存在する場合は削除する（テンプレートのgit履歴をリセット）:
+   ```bash
+   rm -rf .git
+   ```
+
+3. Gitリポジトリを初期化する:
+   ```bash
+   git init
+   git add .
+   git commit -m "chore: initial project setup"
+   ```
+
+4. developブランチを作成する:
+   ```bash
+   git checkout -b develop
+   ```
+
 ## 完了条件
 
 - 6つの永続ドキュメントが全て作成されていること
+- Gitリポジトリが初期化され、developブランチが作成されていること
 
 完了時のメッセージ:
 ```
@@ -96,6 +120,9 @@ ls docs/ideas/
 ✅ docs/development-guidelines.md
 ✅ docs/glossary.md
 
+Git:
+✅ リポジトリ初期化済み（developブランチ作成済み）
+
 これで開発を開始する準備が整いました。
 
 今後の使い方:
@@ -104,6 +131,9 @@ ls docs/ideas/
 
 - 機能の追加: /add-feature [機能名] を実行してください
   例: /add-feature ユーザー認証
+
+- 変更のコミット: /commit を実行してください
+  例: /commit feat(auth): ログイン機能を追加
 
 - ドキュメントレビュー: /review-docs [パス] を実行してください
   例: /review-docs docs/product-requirements.md

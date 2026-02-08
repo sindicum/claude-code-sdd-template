@@ -320,10 +320,10 @@ it('should work correctly', () => { });
 ```typescript
 // リポジトリをモック化
 const mockRepository: ITaskRepository = {
-  save: jest.fn(),
-  findById: jest.fn(),
-  findAll: jest.fn(),
-  delete: jest.fn(),
+  save: vi.fn(),
+  findById: vi.fn(),
+  findAll: vi.fn(),
+  delete: vi.fn(),
 };
 
 // サービスは実際の実装を使用

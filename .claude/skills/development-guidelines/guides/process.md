@@ -226,7 +226,7 @@ describe('TaskService', () => {
 **測定可能な目標**:
 
 ```json
-// jest.config.js
+// vitest.config.ts
 {
   "coverageThreshold": {
     "global": {

@@ -293,7 +293,7 @@ src/
 - `node_modules/`
 - `dist/`
 - `.env`
-- `.steering/` (タスク管理用の一時ファイル)
+- `.steering/` (作業単位の一時ドキュメント)
 - `*.log`
 - `.DS_Store`
 

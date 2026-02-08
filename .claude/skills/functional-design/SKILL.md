@@ -12,13 +12,16 @@ allowed-tools: Read, Write
 
 機能設計書作成を開始する前に、以下を確認してください:
 
-### docs/product-requirements.md が作成されている
+### 必須ドキュメント
 
-**必須**: PRDが以下の場所に存在する必要があります:
+1. `docs/product-requirements.md` (PRD)
 
-**ファイルパス**: `docs/product-requirements.md`
+### 推奨ドキュメント
+
+1. `docs/architecture.md` (アーキテクチャ設計書) - 存在する場合は技術スタックやレイヤー構造を参照
 
 機能設計書は、PRDで定義された要件を技術的に実現する方法を詳細化します。
+アーキテクチャ設計書が存在する場合は、その技術選定やレイヤー構造と整合を取ります。
 
 ## 既存ドキュメントの優先順位
 

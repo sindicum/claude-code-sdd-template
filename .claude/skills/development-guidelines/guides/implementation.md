@@ -499,15 +499,15 @@ describe('TaskService', () => {
 ```typescript
 // ✅ 良い例: インターフェースに基づくモック
 const mockRepository: TaskRepository = {
-  save: jest.fn(),
-  findById: jest.fn(),
-  findAll: jest.fn(),
-  delete: jest.fn(),
+  save: vi.fn(),
+  findById: vi.fn(),
+  findAll: vi.fn(),
+  delete: vi.fn(),
 };
 
 // テストごとに動作を設定
 beforeEach(() => {
-  mockRepository.findById = jest.fn((id) => {
+  mockRepository.findById = vi.fn((id) => {
     if (id === 'existing-id') {
       return Promise.resolve(mockTask);
     }

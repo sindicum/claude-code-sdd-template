@@ -15,9 +15,8 @@ allowed-tools: Read, Write
 ### 必須ドキュメント
 
 1. `docs/product-requirements.md` (PRD)
-2. `docs/functional-design.md` (機能設計書)
 
-アーキテクチャ設計は、PRDの要件と機能設計を技術的に実現するための
+アーキテクチャ設計は、PRDの要件を技術的に実現するための
 システム構造とテクノロジースタックを定義します。
 
 ## 既存ドキュメントの優先順位

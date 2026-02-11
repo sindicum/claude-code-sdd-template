@@ -265,13 +265,13 @@ src/
 **構造**:
 ```
 .steering/
-└── [YYYYMMDD]-[task-name]/
+└── [NNN]_[YYYYMMDD]_[task-name]/
     ├── requirements.md      # 今回の作業の要求内容
     ├── design.md            # 変更内容の設計
     └── tasklist.md          # タスクリスト
 ```
 
-**命名規則**: `20250115-add-user-profile` 形式
+**命名規則**: `001_20250115_add-user-profile` 形式
 
 ### .claude/ (Claude Code設定)
 

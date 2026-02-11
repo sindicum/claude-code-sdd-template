@@ -104,7 +104,7 @@ const task: Task = {
 **定義**: タスク管理のために作成される作業記録ドキュメント
 
 **説明**:
-ステアリングファイルは `.steering/[YYYYMMDD]-[task-name]/` ディレクトリに
+ステアリングファイルは `.steering/[NNN]_[YYYYMMDD]_[task-name]/` ディレクトリに
 配置されます。タスクの仕様、実装メモ、レビュー記録などを含みます。
 タスク完了後もGitリポジトリに保持され、開発履歴として参照できます。
 
@@ -119,7 +119,7 @@ const task: Task = {
 **ディレクトリ構造**:
 ```
 .steering/
-└── 20250101-add-priority-feature/
+└── 001_20250101_add-priority-feature/
     ├── requirements.md      # 今回の作業の要求内容
     ├── design.md            # 変更内容の設計
     └── tasklist.md          # タスクリスト

@@ -16,7 +16,7 @@
 Glob(".steering/*/tasklist.md")
 ```
 
-最新の日付のディレクトリを特定する（命名規則: `YYYYMMDD-[feature-name]`）
+最新のディレクトリを特定する（命名規則: `NNN_YYYYMMDD_[feature-name]`、通し番号が最大のもの）
 
 ### Step 2: tasklist.md の解析
 
@@ -31,7 +31,7 @@ Glob(".steering/*/tasklist.md")
 以下の形式でコンソールに出力:
 
 ```
-📁 アクティブ: .steering/YYYYMMDD-feature-name/
+📁 アクティブ: .steering/NNN_YYYYMMDD_feature-name/
 
 📊 進捗状況:
   ✅ 完了: X/Y

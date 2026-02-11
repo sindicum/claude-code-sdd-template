@@ -3,7 +3,7 @@
 Phase 3 完了後にこのテンプレートに沿って出力する。
 1ファイル（`docs/ideas/initial-requirement.md`）にまとめる。
 
-このファイルは後続の工程（スペック駆動開発、技術設計等）への入力となる。
+このファイルは `/setup-project` 実行時に prd-writing スキルへの入力となる。
 技術的な実装詳細はここには書かない。
 
 ---
@@ -145,12 +145,14 @@ Phase 3 完了後にこのテンプレートに沿って出力する。
 
 ## 8. 次のステップ
 
-この文書を入力として、以下を別途進める:
+この文書を入力として `/setup-project` を実行し、以下のドキュメントを作成する:
 
-- [ ] 技術スタック選定・アーキテクチャ設計
-- [ ] 各機能の詳細仕様策定（入力/処理/出力/テストケース）
-- [ ] データモデル設計
-- [ ] UI/画面設計
+- [ ] `docs/product-requirements.md` — PRD（prd-writing スキル）
+- [ ] `docs/architecture.md` — アーキテクチャ設計（architecture-design スキル）
+- [ ] `docs/functional-design.md` — 機能設計（functional-design スキル）
+- [ ] `docs/repository-structure.md` — リポジトリ構造（repository-structure スキル）
+- [ ] `docs/development-guidelines.md` — 開発ガイドライン（development-guidelines スキル）
+- [ ] `docs/glossary.md` — 用語集（glossary-creation スキル）
 ```
 
 ---

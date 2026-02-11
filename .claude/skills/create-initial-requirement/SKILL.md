@@ -1,5 +1,5 @@
 ---
-name: create-nitial-requirement
+name: create-initial-requirement
 description: >
   アイデア段階の曖昧な構想を、対話（壁打ち）を通じて
   「何を作るか」を明確にする機能要件整理スキル。
@@ -22,7 +22,21 @@ description: >
 
 > **このスキルの守備範囲**: 「何を作るか」「なぜ作るか」「何を作らないか」
 > **守備範囲外**: 技術選定、実装仕様、データモデル設計、API設計
-> → それらはスペック駆動開発スキル等で別途整理する
+> → それらは `/setup-project` 以降のスキル群で整理する
+
+## パイプライン上の位置づけ
+
+```
+create-initial-requirement（このスキル）
+    ↓ 出力: docs/ideas/initial-requirement.md
+/setup-project
+    ↓ prd-writing が docs/ideas/ を読み込んで PRD を作成
+    ↓ 以降 architecture-design → functional-design → ...
+```
+
+- **入力**: ユーザーの頭の中にあるアイデア・構想
+- **出力**: `docs/ideas/initial-requirement.md`
+- **後続**: `/setup-project` コマンド（prd-writing スキルがこの出力を読み込む）
 
 ## 基本姿勢
 
@@ -206,11 +220,11 @@ Phase 3: 通知設定
 
 **すべてのフェーズが完了したら、機能要件サマリーをMarkdownで出力する。**
 
-出力前に `references/output-template.md` を `view` ツールで読み込み、
+出力前に `references/output-template.md` を `Read` ツールで読み込み、
 テンプレートに沿って出力すること。
 
-出力は1ファイル（`{project-name}-requirements.md`）にまとめる。
-このファイルが後続のスペック駆動開発スキル等への入力となる。
+出力は `docs/ideas/initial-requirement.md` に保存する。
+このファイルが `/setup-project` 実行時に prd-writing スキルへの入力となる。
 
 ---
 
@@ -219,7 +233,7 @@ Phase 3: 通知設定
 ### 質問パターンの参照
 
 各フェーズで効果的な質問の仕方に迷ったら、
-`references/question-patterns.md` を `view` ツールで読み込むこと。
+`references/question-patterns.md` を `Read` ツールで読み込むこと。
 
 ### 中断と再開
 
@@ -246,3 +260,4 @@ references/
 ├── output-template.md      最終出力テンプレート
 └── question-patterns.md    フェーズ別の質問パターン集
 ```
+

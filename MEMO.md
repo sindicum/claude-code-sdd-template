@@ -6,9 +6,9 @@
 
 ## 使い方
 
-1. 実装概要を記述（docs/ideas/idea-memo.md）。手入力でOK。
+1. 要件整理: 「壁打ちしたい」「アイデアを整理したい」等と伝えると create-initial-requirement スキルが起動し、対話を通じて要件を整理。成果物は `docs/ideas/initial-requirement.md` に出力される。（手入力で `docs/ideas/` にメモを置いてもOK）
 
-2. /setup-projectコマンドで6つの永続的ドキュメントを生成し、Git初期化。最初にプロダクト要件定義が生成され、承認したら残り5ファイルが生成。最後にGitリポジトリ初期化とdevelopブランチ作成。
+2. /setup-projectコマンドで6つの永続的ドキュメントを生成し、Git初期化。`docs/ideas/` の内容を入力としてプロダクト要件定義が生成され、承認したら残り5ファイルが生成。最後にGitリポジトリ初期化とdevelopブランチ作成。`docs/ideas/` にファイルがない場合はコマンドが中断され、先にステップ1の実行を案内する。
    2-1. /docs/product-requirements.md（プロダクト要件定義）
    2-2. /docs/functional-design.md（機能設計）
    2-3. /docs/architecture.md（技術仕様）
@@ -17,8 +17,8 @@
    2-6. /docs/glossary.md（ユビキタス言語定義）
 3. review-docsコマンドでドキュメント間の整合性や記述の正確性をチェック・修正。サブエージェント（doc-reviewer）が起動し実行
 
-4. initial-featureコマンドで初回実装。PRDのP0機能を全てスキャフォールドから実装し、developブランチにコミット（ユーザー承認制）
-5. add-featureコマンドで機能追加（以降、add-featureコマンドの繰り返し）。実装完了後にfeatureブランチを作成しコミット（ユーザー承認制）
+4. initial-featureコマンドで初回実装。PRDのP0機能を全てスキャフォールドから実装し、developブランチにコミット（ユーザー承認制）。完了時にP1/P2機能の一覧と次のアクションが案内される。
+5. add-featureコマンドでP1/P2機能を追加（以降、add-featureコマンドの繰り返し）。実装完了後にfeatureブランチを作成しコミット（ユーザー承認制）
 6. /commitコマンドでスタンドアロンのGitコミットも可能（pushは手動）
 
 ---
@@ -68,13 +68,32 @@
 - 上位のドキュメントが存在しないと、下位のスキルは実行不可または不完全になる
 - `/setup-project` コマンドはこの順序で 6 つのドキュメントを作成する
 
+### create-initial-requirement
+
+| 項目           | 内容                                            |
+| -------------- | ----------------------------------------------- |
+| **目的**       | 壁打ち対話で「何を作るか」を明確にする要件整理  |
+| **出力先**     | `docs/ideas/initial-requirement.md`              |
+| **後続**       | `/setup-project` → prd-writing スキル            |
+
+**3 フェーズの対話プロセス**:
+
+| フェーズ                 | 目的                       |
+| ------------------------ | -------------------------- |
+| Phase 1: Capture（捕捉） | 何を、なぜ作りたいのか     |
+| Phase 2: Explore（探索） | 機能の輪郭と境界を描く     |
+| Phase 3: Prioritize      | MoSCoW 分類で優先度を決定  |
+
+**トリガー**: 「壁打ちしたい」「アイデアを整理したい」「要件を整理したい」等
+
 ### prd-writing
 
-| 項目           | 内容                              |
-| -------------- | --------------------------------- |
-| **目的**       | プロダクト要求定義書（PRD）の作成 |
-| **許可ツール** | Read, Write                       |
-| **出力先**     | `docs/product-requirements.md`    |
+| 項目           | 内容                                                |
+| -------------- | --------------------------------------------------- |
+| **目的**       | プロダクト要求定義書（PRD）の作成                   |
+| **許可ツール** | Read, Write                                         |
+| **入力**       | `docs/ideas/`（create-initial-requirement の出力）   |
+| **出力先**     | `docs/product-requirements.md`                      |
 
 **PRD に含めるもの**:
 
@@ -84,11 +103,14 @@
 - 非機能要件
 - スコープ外
 
-**優先度の定義**:
+**優先度の定義**（MoSCoW からの変換）:
 
-- **P0（必須）**: MVP に含める機能
-- **P1（重要）**: 初期リリース後に追加
-- **P2（できれば）**: 将来的に検討
+| MoSCoW（入力） | PRD優先度（出力） | 意味                 |
+| --------------- | ----------------- | -------------------- |
+| Must            | P0（必須）        | MVPに含める機能      |
+| Should          | P1（重要）        | 初期リリース後に追加 |
+| Could           | P2（できれば）    | 将来的に検討         |
+| Won't           | スコープ外        | 明示的に除外         |
 
 ### functional-design
 
@@ -312,6 +334,7 @@ cat prompt.md | claude -p --dangerously-skip-permissions \
 | commands     | status.md                   | 新規作成          |
 | commands     | validate-design.md          | 2を参考に新規作成 |
 | commands     | validate-gap.md             | 2を参考に新規作成 |
+| skills       | create-initial-requirement  | 新規作成          |
 | skills       | architecture-design         | 1を改変           |
 | skills       | development-guidelines      | 1を改変           |
 | skills       | functional-design           | 1を改変           |

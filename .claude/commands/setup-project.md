@@ -13,21 +13,27 @@ claude
 > /setup-project
 ```
 
-## 実行前の確認
+## 前提条件
 
-`docs/ideas/` ディレクトリ内のファイルを確認します。
+`docs/ideas/` に要件整理ファイルが必要です。
+
 ```bash
 # 確認
 ls docs/ideas/
 
-# ファイルが存在する場合
-✅ docs/ideas/initial-requirements.md が見つかりました
+# ファイルが存在する場合 → セットアップ続行
+✅ docs/ideas/initial-requirement.md が見つかりました
    この内容を元にPRDを作成します
 
-# ファイルが存在しない場合
+# ファイルが存在しない場合 → セットアップ中断
 ⚠️  docs/ideas/ にファイルがありません
-   対話形式でPRDを作成します
+   先に要件整理を行ってください:
+   「アイデアを整理したい」「壁打ちしたい」と伝えてください
+   → create-initial-requirement スキルで docs/ideas/initial-requirement.md を作成後、
+     再度 /setup-project を実行してください
 ```
+
+**`docs/ideas/` にファイルがない場合は、このコマンドを中断してください。**
 
 ## 手順
 
@@ -39,8 +45,8 @@ ls docs/ideas/
 ### ステップ1: プロダクト要求定義書の作成
 
 1. **prd-writingスキル**をロード
-2. `docs/ideas/`の内容を元に`docs/product-requirements.md`を作成
-3. 壁打ちで出たアイデアを具体化：
+2. `docs/ideas/`の内容（create-initial-requirement スキルの出力）を元に`docs/product-requirements.md`を作成
+3. 要件サマリーを正式なPRDに変換：
    - プロダクトの概要と目的
    - 前提条件・制約条件
    - 機能要件（MVP/将来、優先度P0-P2）

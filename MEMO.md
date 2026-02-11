@@ -8,7 +8,7 @@
 
 1. 要件整理: 「壁打ちしたい」「アイデアを整理したい」等と伝えると create-initial-requirement スキルが起動し、対話を通じて要件を整理。成果物は `docs/ideas/initial-requirement.md` に出力される。（手入力で `docs/ideas/` にメモを置いてもOK）
 
-2. /setup-projectコマンドで6つの永続的ドキュメントを生成し、Git初期化。`docs/ideas/` の内容を入力としてプロダクト要件定義が生成され、承認したら残り5ファイルが生成。最後にGitリポジトリ初期化とdevelopブランチ作成。`docs/ideas/` にファイルがない場合はコマンドが中断され、先にステップ1の実行を案内する。
+2. /setup-projectコマンドで6つの永続的ドキュメントを生成。`docs/ideas/` の内容を入力としてプロダクト要件定義が生成され、承認したら残り5ファイルが生成。`docs/ideas/` にファイルがない場合はコマンドが中断され、先にステップ1の実行を案内する。
    2-1. /docs/product-requirements.md（プロダクト要件定義）
    2-2. /docs/functional-design.md（機能設計）
    2-3. /docs/architecture.md（技術仕様）
@@ -17,9 +17,8 @@
    2-6. /docs/glossary.md（ユビキタス言語定義）
 3. review-docsコマンドでドキュメント間の整合性や記述の正確性をチェック・修正。サブエージェント（doc-reviewer）が起動し実行
 
-4. initial-featureコマンドで初回実装。PRDのP0機能を全てスキャフォールドから実装し、developブランチにコミット（ユーザー承認制）。完了時にP1/P2機能の一覧と次のアクションが案内される。
-5. add-featureコマンドでP1/P2機能を追加（以降、add-featureコマンドの繰り返し）。実装完了後にfeatureブランチを作成しコミット（ユーザー承認制）
-6. /commitコマンドでスタンドアロンのGitコミットも可能（pushは手動）
+4. initial-featureコマンドで初回実装。PRDのP0機能を全てスキャフォールドから実装。完了時にGitコミットの案内とP1/P2機能の一覧と次のアクションが案内される。
+5. add-featureコマンドでP1/P2機能を追加（以降、add-featureコマンドの繰り返し）。実装完了後にGitコミットの案内が表示される。
 
 ---
 
@@ -27,12 +26,10 @@
 
 | コマンド                          | 内容                                                                                           |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `/setup-project`                  | 6つの永続的ドキュメントを順次生成し、Git初期化（developブランチ作成まで）                      |
+| `/setup-project`                  | 6つの永続的ドキュメントを順次生成                                                             |
 | `/review-docs [ドキュメントパス]` | doc-reviewerサブエージェントでドキュメントの品質評価と改善提案                                 |
-| `/initial-feature`                | 初回実装。P0機能全てをスキャフォールドから実装→検証→developブランチにコミット（ユーザー承認後） |
-| `/add-feature [機能内容]`         | 機能追加。steeringスキルで実装→検証→featureブランチにコミット（ユーザー承認後）                |
-| `/commit`                         | 変更をConventional Commits形式でコミット。git-operatorサブエージェントが分析・メッセージ生成   |
-| `/commit [メッセージ]`            | メッセージ指定でコミット（例: `/commit feat(auth): ログイン追加`）                             |
+| `/initial-feature`                | 初回実装。P0機能全てをスキャフォールドから実装→検証→Gitコミット案内                            |
+| `/add-feature [機能内容]`         | 機能追加。steeringスキルで実装→検証→Gitコミット案内                                           |
 | `/status`                         | ステアリングファイルに基づく現在の進行状況確認（tasklist.md の読み込み）                       |
 | `/validate-design`                | docs/内のドキュメント間の整合性を検証。doc-reviewerサブエージェントを起動。                    |
 | `/validate-gap`                   | 実装コードとdocs内の仕様書を比較し整合性を確認。implementation-validatorサブエージェントを起動 |
@@ -223,29 +220,6 @@
 - 改善が必要な点（必須/推奨/提案の優先度別）
 - 次のステップ
 
-### git-operator
-
-| 項目       | 内容                                          |
-| ---------- | --------------------------------------------- |
-| **目的**   | Conventional Commitsに準拠したGitコミット支援 |
-| **モデル** | Sonnet                                        |
-| **対象**   | Git操作（ブランチ作成、コミット、状態確認）   |
-
-**3つの操作モード**:
-
-| モード             | 用途         | 内容                                          |
-| ------------------ | ------------ | --------------------------------------------- |
-| モード 1: ブランチ | ブランチ作成 | developの存在確認、feature/fix/\*ブランチ作成 |
-| モード 2: コミット | コミット実行 | 変更分析→メッセージ生成→ユーザー確認→コミット |
-| モード 3: 状態確認 | Git状態確認  | status, branch, log表示                       |
-
-**安全原則**:
-
-- `git push --force`, `git reset --hard`, `git clean -f` 禁止
-- main/developへの直接コミット禁止
-- 機密ファイル（`.env`, `*.pem`等）のコミット防止
-- **ユーザー承認なしにコミットしない**（最重要）
-
 ### implementation-validator
 
 | 項目       | 内容                                     |
@@ -278,7 +252,7 @@
 - 親エージェントのコンテキストを圧迫せずに、独立した検証・分析を実行する。
 
 - 詳細な結果を親エージェントに返却
-- 例: doc-reviewer, implementation-validator, git-operator
+- 例: doc-reviewer, implementation-validator
 
 ### スキル（Skills）= 「やり方」
 
@@ -325,10 +299,8 @@ cat prompt.md | claude -p --dangerously-skip-permissions \
 | ディレクトリ | 内容                        | 備考              |
 | ------------ | --------------------------- | ----------------- |
 | agents       | doc-reviewer.md             | 1を引用           |
-| agents       | git-operator.md             | 新規作成          |
 | agents       | implementation-validator.md | 1を引用           |
 | commands     | add-feature.md              | 1を改変           |
-| commands     | commit.md                   | 新規作成          |
 | commands     | review-docs.md              | 1を引用           |
 | commands     | setup-project.md            | 1を改変           |
 | commands     | status.md                   | 新規作成          |
